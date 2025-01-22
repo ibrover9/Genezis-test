@@ -1,14 +1,23 @@
-import './assets/main.css'
+import "./assets/main.css";
 
-import { createApp } from 'vue'
-import { createPinia } from 'pinia'
+import { createApp } from "vue";
 
-import App from './App.vue'
-import router from './router'
+import { createRouter, createWebHistory } from "vue-router";
+import { createPinia } from "pinia";
 
-const app = createApp(App)
+import App from "./App.vue";
+import Main from "./views/MainView.vue";
 
-app.use(createPinia())
-app.use(router)
+const app = createApp(App);
 
-app.mount('#app')
+const routes = [{ path: "/", name: "Home", component: Main }];
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes,
+});
+
+app.use(createPinia());
+app.use(router);
+
+app.mount("#app");
