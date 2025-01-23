@@ -1,12 +1,9 @@
 <template>
   <div class="language-selector">
-    <!-- Кнопка выбора языка -->
     <button class="dropdown-button" @click="toggleDropdown">
       Язык: {{ selectedLanguage.label }}
       <span class="arrow">&#9662;</span>
     </button>
-
-    <!-- Выпадающий список языков -->
     <ul v-if="isOpen" class="dropdown-menu">
       <li
         v-for="language in languages"
@@ -27,26 +24,21 @@
 <script setup>
 import { ref } from "vue";
 
-// Список языков
 const languages = ref([
-  { label: "Русский", value: "ru" },
-  { label: "English", value: "en" },
-  { label: "Español", value: "es" },
-  { label: "Português", value: "pt" },
+  { label: "Не выбрано", value: "pt" },
+  { label: "Сделка", value: "ru" },
+  { label: "Контакт", value: "en" },
+  { label: "Компания", value: "es" },
 ]);
 
-// Выбранный язык по умолчанию
 const selectedLanguage = ref(languages.value[0]);
 
-// Состояние для открытия/закрытия списка
 const isOpen = ref(false);
 
-// Переключение состояния выпадающего списка
 const toggleDropdown = () => {
   isOpen.value = !isOpen.value;
 };
 
-// Выбор языка и закрытие списка
 const selectLanguage = (language) => {
   selectedLanguage.value = language;
   isOpen.value = false;

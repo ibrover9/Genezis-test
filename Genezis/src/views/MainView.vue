@@ -1,9 +1,9 @@
-<script setup lang="ts">
+<script setup>
 import Button from "../components/ButtonTest.vue";
-import SelectionTest from "../components/SelectionTest.vue";
+import Selection from "../components/SelectionTest.vue";
 </script>
 <template>
-  <div class="main"><SelectionTest /><Button /></div>
+  <div class="main"><Selection /><Button /></div>
 </template>
 
 <style scoped>
