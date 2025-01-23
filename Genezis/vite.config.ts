@@ -4,6 +4,8 @@ import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import vueDevTools from "vite-plugin-vue-devtools";
+import { useProfileStore } from "@/store/profile";
+const profileStore = useProfileStore();
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -15,10 +17,18 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      "/api": {
+      // Прокси для amoCRM API
+      "/amocrm-api": {
+        target: `https://${profileStore.baseDomain}`,
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/amocrm-api/, ""), // Заменяем префикс для API
+        secure: false,
+      },
+      // Прокси для другого API
+      "/gnzs-api": {
         target: "https://app2.gnzs.ru",
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ""),
+        rewrite: (path) => path.replace(/^\/gnzs-api/, ""), // Заменяем префикс для API
         secure: false,
       },
     },
