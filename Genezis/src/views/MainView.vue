@@ -3,28 +3,12 @@ import Button from "../components/ButtonTest.vue";
 import Selection from "../components/SelectionTest.vue";
 import axios from "axios";
 import { ref, onMounted } from "vue";
+import { useProfileStore } from "@/store/profile";
 
-const accessToken = ref(null);
-const clientId = "32185358";
-
-const fetchAccessToken = async () => {
-  try {
-    const response = await axios.get("/api/amocrm/test/oauth/get-token.php", {
-      headers: {
-        "X-Client-Id": clientId,
-        "Content-Type": "application/json",
-      },
-    });
-
-    accessToken.value = response.data.access_token;
-    console.log("Access Token:", accessToken.value);
-  } catch (error) {
-    console.error("Ошибка получения токена:", error);
-  }
-};
+const profileStore = useProfileStore();
 
 onMounted(() => {
-  fetchAccessToken();
+  profileStore.fetchAccessToken();
 });
 </script>
 <template>
